@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% block meta %}
+{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="/static/Css/User/edit.css">
+    <link rel="stylesheet" href="/static/Css/jrValidator.css">
+    <link rel="stylesheet" href="/static/Css/jrValidator.min.css">
+{% endblock %}
+{% block body %}
+    <h2>{{ title }}</h2>
+    <section>
+        <form action="" method="post">
+            <ul>
+                <li>
+                    <label for="userName">姓名</label>
+                    <input data-validation-message="This is my custom error message" required name="userName" value="{{ person.userName }}" id="userName" type="text">
+                </li>
+                <li>
+                    <label for="loginName">登录名</label>
+                    <input data-validation-message="This is my custom error message" required name="loginName" value="{{ person.loginName }}" id="loginName" type="text">
+                </li>
+                <li>
+                    <label for="userID">证件号</label>
+                    <input data-validation-message="This is my custom error message" required name="userID" value="{{ person.userID }}" id="userID" type="text">
+                </li>
+                <li>
+                    <label for="gender">性别</label>
+                    <select data-validation-message="This is my custom error message" required name="gender" id="gender">
+                        <option value="0" {{ "selected" if person.gender == 0 }}>男</option>
+                        <option value="1" {{ "selected" if person.gender == 1 }}>女</option>
+                    </select>
+                </li>
+                <li>
+                    <label for="department">部门</label>
+                    <select class="dep-select" name="departmentID" id="department">
+                        <option value="0">未注册</option>
+                        {% for dep in departments %}
+                            <option value="{{ dep.id }} " {{ "selected" if person.departmentID == dep.id }}>{{ dep.name }}</option>
+                        {% endfor %}
+                    </select>
+                </li>
+                <li>
+                    <label for="rights">登录身份</label>
+                    <select class="rights-select" name="rights" id="rights">禁止登录
+                        <option value="0" {{ "selected" if person.rights == 0 }}>普通用户</option>
+                        <option value="1" {{ "selected" if person.rights == 1 }}>管理员</option>
+                        <option value="1" {{ "selected" if person.rights == 2 }}></option>
+                    </select>
+                </li>
+                <li class="role-block">
+                    <label for="roles">权限管理</label>
+                    <section >
+                        <ul>
+                            {% for role in roles %}
+                                <li><input type="checkbox" id="{{ role.id }}" name="roleIDs" value="{{ role.id }}" {{ "checked" if role.id in person.roles }}><label for="{{ role.id }}">{{ role.name }}</label></li>
+                            {% endfor %}
+                        </ul>
+                    </section>
+                </li>
+                <li class="last-li">
+                    <input class="submit-input" required type="submit" value="提交">
+                    <button>取消</button>
+                </li>
+            </ul>
+        </form>
+    </section>
+
+{% endblock %}
+{% block endScript %}
+    <script src="/static/Js/jrValidator.js"></script>
+    <script src="/static/Js/jrValidator.min.js"></script>
+    <script>
+        $("li").on("click", function() {
+            $("li").removeClass("li-checked");
+            $(this).addClass("li-checked");
+        });
+
+        $("button").on("click", function() {
+            window.history.back();
+            return false;
+        })
+    </script>
+{% endblock %}

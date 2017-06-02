@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block style %}
+    <link rel="stylesheet" href="/static/Css/Department/add.css">
+{% endblock %}
+{% block body %}
+    <h2>{{ title }}</h2>
+    <section>
+        <form action="" method="post">
+            <ul>
+                <li>
+                    <label for="name">名称</label>
+                    <input required name="name" value="" id="name" type="text">
+                </li>
+                <li>
+                    <label for="parentID">父部门</label>
+                    <select class="dep-select" name="parentID" id="parentID">
+                        <option value="0" selected>无</option>
+                        {% for dep in departments %}
+                            {% if dep.id != 1 %}
+                                <option value="{{ dep.id }}">{{ dep.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </li>
+                <li class="role-block">
+                    <label for="detail">描述</label>
+                    <textarea name="detail" id="detail" cols="39" rows="3"></textarea>
+                </li>
+                <li class="last-li">
+                    <input class="submit-input" required type="submit" value="提交">
+                    <button>取消</button>
+                </li>
+            </ul>
+        </form>
+    </section>
+
+{% endblock %}
+{% block endScript %}
+    <script src="/static/Js/jrValidator.js"></script>
+    <script src="/static/Js/jrValidator.min.js"></script>
+    <script>
+        $("li").on("click", function() {
+            $("li").removeClass("li-checked");
+            $(this).addClass("li-checked");
+        });
+
+        $("button").on("click", function() {
+            location.href = "/department/table";
+            return false;
+        })
+    </script>
+{% endblock %}

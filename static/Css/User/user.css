@@ -1,0 +1,242 @@
+body>section {
+    padding: 5px 45px;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    left: 0;
+    bottom: 50px;
+    overflow: auto;
+    overflow-x: hidden;
+    margin-bottom: 10px;
+}
+
+section>section {
+    height: 320px;
+    width: 340px;
+    background-color: rgba(19, 26, 32, 0.6);
+    display: inline-block;
+    margin-right: 15px;
+    margin-top: 20px;
+    border-radius: 6px;
+    box-shadow: 5px 5px 5px rgba(19, 26, 32, 0.8);
+}
+
+header {
+    padding: 10px 15px 0 15px;
+}
+
+header img {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    border-radius: 90px;
+}
+
+header>aside {
+    height: 80px;
+    width: 150px;
+    float: right;
+    padding: 0 20px 0 20px;
+    border: 0;
+    display: inline-block;
+}
+
+header>aside>p {
+    float: left;
+    color: white;
+    height: 80px;
+    width: 100px;
+    line-height: 80px;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+header>aside>section {
+    float: right;
+    display: inline-block;
+    width: 20px;
+    height: 80px;
+}
+
+header>aside>section>a {
+    margin-top: 10px;
+    height: 20px;
+    width: 20px;
+    display: block;
+}
+
+.person-item:hover {background-color: rgba(0, 0, 0, 0.3)}
+
+.ctrl-edit {
+    background: url("/static/Image/icon-edit.png");
+}
+
+.ctrl-delete {
+    background: url("/static/Image/icon-trash.png");
+}
+
+.ctrl-edit:hover {
+    background: url("/static/Image/icon-edit1.png");
+}
+
+.ctrl-delete:hover {
+    background: url("/static/Image/icon-trash1.png");
+}
+
+ul {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+li {
+    border-top: 1px solid #5d7498;
+    padding: 5px 0 5px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+li p, span {
+    padding-left: 15px;
+    display: inline-block;
+    font-size: 12px;
+    color: #a7c4db !important;
+}
+
+li p {
+    width: 140px;
+}
+
+li span{
+    width: 60px;
+}
+
+section>aside {
+    height: 136px;
+}
+
+footer {
+    position: absolute;
+    bottom: 10px;
+    right: 45px;
+    left: 45px;
+    height: 40px;
+    line-height: 40px;
+}
+
+footer span {
+    font-size: 14px;
+    color: white!important;
+}
+
+footer aside{
+    float: right;
+}
+
+footer aside a {
+    display: inline-block;
+    width: 27px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    color: white!important;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+footer aside a:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+    color: rgba(0, 0, 0, 0.6)!important;
+}
+
+.prev {
+    width: 38px;
+    border-radius: 16px 0 0 16px;
+}
+
+.next {
+    width: 38px;
+    border-radius: 0 16px 16px 0;
+}
+
+.more:hover {
+    cursor: default;
+    color: white!important;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.cur-page {
+    background-color: rgba(255, 255, 255, 0.6);
+    color: rgba(0, 0, 0, 0.6)!important;
+}
+
+input {
+    border-radius: 5px 0 0 5px;
+}
+
+button {
+    background: #5d7498;
+    color: #bad6ed;
+    border-radius: 0 5px 5px 0;
+    outline: none;
+}
+
+button:focus {
+    outline: none;
+}
+
+.preDel {
+    background-color: rgba(255, 0, 49, 0.2) !important;
+}
+
+.preToDel {
+    cursor: pointer;
+}
+
+.preToDel a {
+    display: none;
+}
+
+#doDel, #doKind {
+    display: none;
+    opacity: 0.8;
+}
+
+#person-id {
+    display: none;
+}
+
+#doDel {
+    background: rgba(255, 0, 0, 0.6);
+}
+
+#doKind {
+    background: rgba(0, 255, 5, 0.3);
+}
+
+.NoDel {
+    background: gray!important;
+    color: white;
+}
+
+.preKind {
+    background: rgba(0, 255, 5, 0.23);
+}
+
+.header-bar { margin: 10px 20px; height: 40px; padding: 5px; background: rgba(0, 0, 0, 0.3); border-radius:5px;}
+.header-bar * {margin: 0; padding:0; height: 31px; line-height: 30px; display: inline-block;color: #bad6ed!important; }
+.header-bar li {border: 0; margin: 5px; background: #5d7498;  padding: 0 10px; border-radius: 5px;}
+
+.header-bar ul {display: block!important;}
+.header-bar .last {border: 0; float: right; margin: 5px 10px 5px 0; background: rgba(0, 0, 0, 0)}
+.header-bar .last input, button {
+    height: 30px;
+    line-height: 30px;
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.header-bar .last input {border-radius: 5px 0 0 5px!important; padding: 0 5px; color: black!important;}
+.header-bar .last button {border-radius: 0 5px 5px 0; width: 40px; text-align: center; background: #5d7498; }
+.header-bar li { font-size: 14px; cursor: pointer}

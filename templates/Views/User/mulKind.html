@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block style %}
+    <link rel="stylesheet" href="/static/Css/Department/add.css">
+{% endblock %}
+{% block body %}
+    <h2>{{ title }}</h2>
+    <section>
+        <form action="" method="post">
+            <ul>
+                <li>
+                    <label for="departmentID">部门</label>
+                    <select class="dep-select" name="departmentID" id="departmentID">
+                        <option value="0" selected>未注册</option>
+                        {% for dep in departments %}
+                            {% if dep.id != 1 %}
+                                <option value="{{ dep.id }}">{{ dep.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </li>
+                <li class="last-li">
+                    <input class="submit-input" required type="submit" value="提交">
+                    <button>取消</button>
+                </li>
+            </ul>
+        </form>
+    </section>
+
+{% endblock %}
+{% block endScript %}
+    <script>
+        $("li").on("click", function() {
+            $("li").removeClass("li-checked");
+            $(this).addClass("li-checked");
+        });
+
+        $("button").on("click", function() {
+            location.href = "/user";
+            return false;
+        })
+    </script>
+{% endblock %}

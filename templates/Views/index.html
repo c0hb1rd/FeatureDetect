@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block meta %}
+{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="/static/Css/index.css">
+{% endblock %}
+{% block body %}
+    <h1 class="index-title">生物特征身份识别统一管理平台</h1>
+    <img class="index-img" src="/static/Image/logo1.0.svg" alt="生物特征身份识别统一管理平台">
+
+    <header>
+        <a id="logout" href="{{ url_for("users.logout") }}">退出</a>
+        <a>管理员: {{ user }}</a>
+    </header>
+
+    <aside>
+        <ul>
+            <li class="li-checked"><a href="{{ url_for("users.user", title="人员管理") }}"  target="iframe">人员管理</a></li>
+{#            <li><a title="操作日志" target="iframe">操作日志</a></li>#}
+            <li class="parent-menu"><a title="部门管理">部门管理</a></li>
+            <li class="sub-menu">
+                <ul>
+                    <li><a href="{{ url_for("department.listDep", title="部门管理") }}" target="iframe">部门层级</a></li>
+                    <li><a href="{{ url_for("department.tableDep", title="部门管理") }}" target="iframe">部门列表</a></li>
+                </ul>
+            </li>
+            <li class="parent-menu"><a title="权限管理">权限管理</a></li>
+            <li class="sub-menu">
+                <ul>
+                    <li><a href="{{ url_for("authority.listAuth", kind="role") }}" target="iframe">角色管理</a></li>
+                    <li><a href="{{ url_for("authority.listAuth", kind="key") }}" target="iframe">权限点管理</a></li>
+                    <li><a href="{{ url_for("authority.listAuth", kind="control") }}" target="iframe">资源管理</a></li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+
+    <section>
+        <iframe src="{{ url_for("users.user", title="人员管理") }}" frameborder="0" name="iframe"></iframe>
+    </section>
+
+{% endblock %}
+{% block endScript %}
+    <script>
+        $("li").on("click", function() {
+            if (!$(this).hasClass("parent-menu") && !$(this).hasClass("sub-menu")) {
+                $("li").removeClass("li-checked");
+                $(this).addClass("li-checked");
+            }
+        });
+
+        $(".sub-menu a").on("click", function() {
+            $("li").removeClass("li-checked");
+            $(this).parent("li").addClass("li-checked");
+
+{#            $("iframe").location = $(this).href();#}
+{#            return false;#}
+        });
+
+        $(".parent-menu").on("click", function() {
+            $(this).next(".sub-menu").slideToggle()
+        });
+
+    </script>
+{% endblock %}

@@ -1,0 +1,123 @@
+.header-bar {position: fixed; left: 0; right: 0; height: 40px;}
+.header-bar { margin: 10px 20px; height: 40px; padding: 5px; background: rgba(0, 0, 0, 0.3); border-radius:5px;}
+.header-bar * {margin: 0; padding:0; height: 30px; line-height: 30px; display: inline-block;color: #bad6ed!important; }
+.header-bar li {margin: 5px; background: #5d7498;  padding: 0 10px; border-radius: 5px;}
+
+.header-bar ul {display: block!important;}
+.header-bar .last {float: right; margin: 5px 10px 5px 0; background: rgba(0, 0, 0, 0)}
+.header-bar .last input, button {
+    height: 30px;
+    line-height: 30px;
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.header-bar .last input {border-radius: 5px 0 0 5px; padding: 0 5px; color: black!important;}
+.header-bar .last button {border-radius: 0 5px 5px 0; width: 40px; text-align: center; background: #5d7498; }
+
+.table-box * {padding: 0; margin: 0}
+.table-box {margin: 20px;}
+
+.table-box table { width: 100%; border-spacing: 0; color: #a7c4db; border: 1px solid rgba(22, 34, 84, 0.49); border-radius: 5px;}
+
+.table-box thead tr {background-color: rgba(19, 26, 32, 0.6)}
+.table-box thead th {text-align: left; padding: 5px 20px; height: 45px; line-height: 45px; border-right: 1px solid  rgba(22, 34, 84, 0.49); font-size: 20px;}
+.table-box thead th:first-child {border-radius: 5px 0 0 0}
+.table-box thead th:last-child {border-radius: 0 5px 0 0}
+
+.table-box tbody tr {height: 30px; line-height: 30px}
+.table-box tbody tr {background: rgba(19, 26, 32, 0.6)}
+.table-box tbody tr:nth-child(odd) {background: rgba(19, 26, 32, 0.5)}
+.table-box tbody tr:last-child td:first-child {border-radius: 0 0 0 5px}
+.table-box tbody tr:last-child td:last-child {border-radius: 0 0 5px 0}
+.table-box tbody tr:hover {background: rgba(0, 0, 0, 0.1)}
+
+.table-box tbody td {text-align: left; font-size: 16px; padding: 5px 20px; border-top: 1px solid #5d7498; border-right: 1px solid #5d7498}
+
+.table-box tbody a { display: inline-block;margin: 5px 5px 0;height: 20px; width: 20px}
+.table-box .edit {background: url("/static/Image/icon-edit.png") no-repeat center}
+.table-box .ctrl-delete {background: url("/static/Image/icon-trash.png") no-repeat center}
+
+
+
+footer {
+    position: absolute;
+    bottom: 10px;
+    right: 45px;
+    left: 45px;
+    height: 40px;
+    line-height: 40px;
+}
+
+footer span {
+    font-size: 14px;
+    color: white!important;
+}
+
+footer aside{
+    float: right;
+}
+
+footer aside a {
+    display: inline-block;
+    width: 27px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    color: white!important;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+footer aside a:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+    color: rgba(0, 0, 0, 0.6)!important;
+}
+
+.prev {
+    width: 38px;
+    border-radius: 16px 0 0 16px;
+}
+
+.next {
+    width: 38px;
+    border-radius: 0 16px 16px 0;
+}
+
+.more:hover {
+    cursor: default;
+    color: white!important;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.cur-page {
+    background-color: rgba(255, 255, 255, 0.6);
+    color: rgba(0, 0, 0, 0.6)!important;
+}
+
+body>section {
+    padding: 5px 10px;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    left: 0;
+    bottom: 50px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.ctrl-edit {
+    background: url("/static/Image/icon-edit.png");
+}
+
+.ctrl-delete {
+    background: url("/static/Image/icon-trash.png");
+}
+
+.ctrl-edit:hover {
+    background: url("/static/Image/icon-edit1.png");
+}
+
+.ctrl-delete:hover {
+    background: url("/static/Image/icon-trash1.png");
+}

@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% block style %}
+    <link rel="stylesheet" href="/static/Css/classify.css">
+{% endblock %}
+{% block body %}
+    <h2>{{ "分配权限" if kind == 'role' else "分配资源"}}</h2>
+
+    <section>
+        <section class="info-box">
+            <ul>
+                <li>
+                    <section>
+                        <p>名称</p>
+                        <p style="text-align: left">{{ data.name }}</p>
+                    </section>
+                </li>
+                <li>
+                    <section>
+                        <p>描述</p>
+                        <p style="text-align: left">{{ data.detail }}</p>
+                    </section>
+                </li>
+            </ul>
+        </section>
+
+        <form action="" method="post">
+            <section class="check-box">
+                <ul>
+                    {% if kind == 'key' %}
+                        {% for control in data.controls %}
+                            <li>
+                                <section>
+                                    <p title="{{ control.system }}">{{ control.system }}</p>
+                                    <ul>
+                                        {% for ctrl in control.ctrls %}
+                                            <li><input id="{{ ctrl.id }}" name="ctrls" value="{{ ctrl.id }}" type="checkbox" {{ "checked" if ctrl.id in data.ctrlIDs }}><label title="{{ ctrl.name }}" for="{{ ctrl.id }}">{{ ctrl.name }}</label></li>
+                                        {% endfor %}
+                                    </ul>
+                                </section>
+                            </li>
+                        {% endfor %}
+                    {% elif kind == 'role' %}
+                        <li>
+                            <section>
+                                <p>权限点</p>
+                                <ul>
+                                    {% for key in data['keys'] %}
+                                        <li><input id="{{ key.id }}" name="keyIDs" value="{{ key.id }}" type="checkbox" {{ "checked" if key.id in data.keyIDs }}><label for="{{ key.id }}">{{ key.name }}</label></li>
+                                    {% endfor %}
+                                </ul>
+                            </section>
+                        </li>
+                    {% endif %}
+                </ul>
+            </section>
+        </form>
+        <footer>
+            <button id="submit">提交</button><button id="cancel">取消</button>
+        </footer>
+    </section>
+{% endblock %}
+{% block endScript %}
+    <script>
+        $("#cancel").on("click", function () {
+            location.href = "/authority/{{ kind }}";
+        });
+
+        $("#submit").on("click", function () {
+            if ($("input:checked").length > 0)
+                $("form").submit();
+            else
+                alert("未勾选")
+        });
+
+        if ($(".check-box ul").text().trim() == "") {
+            $(".check-box").css("display", "none")
+        }
+    </script>
+{% endblock %}

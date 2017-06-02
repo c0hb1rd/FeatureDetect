@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+{% block style %}
+    <link rel="stylesheet" href="/static/Css/Department/import.css">
+{% endblock %}
+{% block body %}
+    <h2>{{ title }}</h2>
+    <section>
+        <form action="" method="post" enctype="multipart/form-data">
+            <ul>
+                <li class="dep-select">
+                    <label for="parentID">上层机构</label>
+                    <select name="parentID" id="parentID">
+                        <option value="0">无</option>
+                        {% for dep in deps %}
+                            <option value="{{ dep.id }}">{{ dep.name }}</option>
+                        {% endfor %}
+                    </select>
+                </li>
+                <li class="file-li">
+                    <label for="file">文件名</label>
+                    <input required name="file" id="file" type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                    <span>无</span><a href="">浏览</a>
+                </li>
+                <li class="last-li">
+                    <input class="submit-input" type="submit" value="提交">
+                    <button>取消</button>
+                </li>
+            </ul>
+        </form>
+    </section>
+
+{% endblock %}
+{% block endScript %}
+    <script src="/static/Js/jrValidator.js"></script>
+    <script src="/static/Js/jrValidator.min.js"></script>
+    <script>
+        $("li").on("click", function() {
+            $("li").removeClass("li-checked");
+            $(this).addClass("li-checked");
+        });
+
+        $("button").on("click", function() {
+            location.href = "/department/table";
+            return false;
+        });
+
+        $(".file-li input").on("change", function() {
+            var v = $(this).val().split("\\");
+            var filename = v[v.length - 1];
+            if (filename)
+                $(".file-li span").text(filename)
+        });
+
+        $(".file-li a").on("click", function() {
+            $(".file-li input").click();
+            return false;
+        });
+
+        $(".last-li input").on("click", function () {
+            if (!$(".file-li input").val()) {
+                alert("请选择文件");
+                return false;
+            }
+        })
+    </script>
+{% endblock %}

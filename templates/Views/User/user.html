@@ -1,0 +1,272 @@
+{% extends "layout.html" %}
+{% block style %}
+    <link rel="stylesheet" href="/static/Css/User/user.css">
+    <link rel="stylesheet" href="/static/Css/slide.css">
+{% endblock %}
+{% block body %}
+    <div class="cd-popup" role="alert">
+        <div class="cd-popup-container">
+            <p>确定删除人员信息？</p>
+            <ul class="cd-buttons">
+                <li><a id="yes">确定</a></li>
+                <li><a id="no">取消</a></li>
+            </ul>
+            <a href="#0" class="cd-popup-close img-replace">Close</a>
+        </div>
+        <!-- cd-popup-container -->
+    </div>
+
+    <header class="header-bar">
+        <ul>
+            <li id="doDel">批量删除</li>
+            <li id="mulDel">批量删除</li>
+            <li id="doKind">进行分类</li>
+            <li id="mulKind">批量分类</li>
+            <li class="last"><input id="search-key" type="text" placeholder="关键词" value="{{ "" if key == 0 else key }}"><button id="search">搜索</button></li>
+            <li class="last" style="background-color: #5d7498"><input type="checkbox" id="isReg" class="{{ "off" if isReg == 1 else "on" }}" style="float: left; margin: 3px 5px 0 0;  height: 25px"><label for="isReg">未注册</label></li>
+        </ul>
+    </header>
+
+
+
+    <section class="content-box">
+{#        <select style="display: none"  id="count">#}
+{#            <option value="{{ count - 5 }}" style="display: {{ 'none' if count - 5 < 10 else 'normal' }}">{{ count - 5 }}</option>#}
+{#            <option value="{{ count }}" selected>{{ count }}</option>#}
+{#            <option value="{{ count + 5 }}">{{ count + 5 }}</option>#}
+{#        </select>#}
+        {% for person in persons %}
+            <section class="person-item">
+                <span id="person-id">{{ person.id }},</span>
+                <header>
+                    <img src="static/Image/Users/{{ person.id if person.hasLogo else 'default' }}{{ ".png" if person.id > 254 else ".jpg" }}" alt="">
+                    <aside>
+                        <p>{{ person.userName }}</p>
+                        <section>
+                            <a href="/user/edit/{{ person.id }}" class="ctrl-edit" ></a>
+                            <a href="/user/delete/{{ person.id }}" class="ctrl-delete" ></a>
+                        </section>
+                    </aside>
+                </header>
+                <aside>
+                    <ul>
+                        <li>
+                            <span>登录名</span>
+                            <p title="{{ person.loginName }}">{{ person.loginName }}</p>
+                        </li>
+                        <li>
+                            <span>性别</span>
+                            <p title="{{ person.gender|formatSex }}">{{ person.gender|formatSex }}</p>
+                        </li>
+                        <li>
+                            <span>身份证</span>
+                            <p title="{{ person.userID }}">{{ person.userID }}</p>
+                        </li>
+                        <li>
+                            <span>录入时间</span>
+                            <p title="{{ person.recordTime|formatTime }}">{{ person.recordTime|formatTime }}</p>
+                        </li>
+                        <li>
+                            <span>部门</span>
+                            <p title="{{ person.departmentID|departmentName }}">{{ person.departmentID|departmentName }}</p>
+                        </li>
+                        <li>
+                            <span>登录身份</span>
+                            <p title="{{ person.rights|formatRights }}">{{ person.rights|formatRights }}</p>
+                        </li>
+                        <li>
+                            <span>权限管理</span>
+                            <p title="{{ person.roles|formatRoles }}">{{ person.roles|formatRoles }}</p>
+                        </li>
+                    </ul>
+                </aside>
+            </section>
+        {% endfor %}
+    </section>
+
+    {% if persons|length > 0 %}
+        <footer>
+            <span>当页条数：{{ persons|length }} / 总条数：{{ rows }}</span>
+
+            <aside>
+                <a class="prev" href="?key={{ key }}&count={{ count }}&page=0&isReg={{ isReg }}" style="display: {{ 'none' if 0 == page or allPage < 9 else 'inline-block' }}"><<</a>
+                <a href="?key={{ key }}&count={{ count }}&page={{ page - 1 }}&isReg={{ isReg }}" style="display: {{ 'none' if 0 == page else 'inline-block' }}"><</a>
+                {% if allPage > 9 and rows  % count != 0 %}
+                    {% if page + 5 < 10 and page + 5 < allPage %}
+                        {% for i in range(0, 9) %}
+                            <a href="?key={{ key }}&count={{ count }}&page={{ i }}&isReg={{ isReg }}" {{ 'class=cur-page' if page == i else 'class=' }}>{{ i + 1 }}</a>
+                        {% endfor %}
+                    {% elif page + 4 < allPage %}
+                        {% for i in range(page - 4, page + 5) %}
+                            <a href="?key={{ key }}&count={{ count }}&page={{ i }}&isReg={{ isReg }}" {{ 'class=cur-page' if page == i else 'class=' }}>{{ i + 1 }}</a>
+                        {% endfor %}
+                    {% elif page + 4 >= allPage %}
+                        {% for i in range(allPage - 8, allPage + 1) %}
+                            <a href="?key={{ key }}&count={{ count }}&page={{ i }}&isReg={{ isReg }}" {{ 'class=cur-page' if page == i else 'class=' }}>{{ i + 1 }}</a>
+                        {% endfor %}
+                    {% endif %}
+                    <a class="more" style="display: {{ 'none' if page + 5 >= allPage + 1 else 'inline-block' }}">...</a>
+                    <a href="?key={{ key }}&count={{ count }}&page={{ page + 1 }}&isReg={{ isReg }}" style="display: {{ 'none' if allPage + 1 == page + 1 else 'inline-block' }}">></a>
+                    <a class="next" href="?key={{ key }}&count={{ count }}&page={{ allPage }}&isReg={{ isReg }}" style="display: {{ 'none' if allPage + 1 <= page + 5  else 'inline-block' }}">>></a>
+                {% elif allPage > 9 and rows % count == 0 %}
+                    {% if page + 5 < 10 and page + 5 < allPage %}
+                        {% for i in range(0, 9) %}
+                            <a href="?key={{ key }}&count={{ count }}&page={{ i }}&isReg={{ isReg }}" {{ 'class=cur-page' if page == i else 'class=' }}>{{ i + 1 }}</a>
+                        {% endfor %}
+                    {% elif page + 4 < allPage %}
+                        {% for i in range(page - 4, page + 5) %}
+                            <a href="?key={{ key }}&count={{ count }}&page={{ i }}&isReg={{ isReg }}" {{ 'class=cur-page' if page == i else 'class=' }}>{{ i + 1 }}</a>
+                        {% endfor %}
+                    {% elif page + 4 >= allPage %}
+                        {% for i in range(allPage - 8, allPage) %}
+                            <a href="?key={{ key }}&count={{ count }}&page={{ i }}&isReg={{ isReg }}" {{ 'class=cur-page' if page == i else 'class=' }}>{{ i + 1 }}</a>
+                        {% endfor %}
+                    {% endif %}
+                    <a class="more" style="display: {{ 'none' if page + 5 >= allPage else 'inline-block' }}">...</a>
+                    <a href="?key={{ key }}&count={{ count }}&page={{ page + 1 }}&isReg={{ isReg }}" style="display: {{ 'none' if allPage - 1 == page else 'inline-block' }}">></a>
+                    <a class="next" href="?key={{ key }}&count={{ count }}&page={{ allPage - 1 }}&isReg={{ isReg }}" style="display: {{ 'none' if allPage <= page + 5  else 'inline-block' }}">>></a>
+                {% else %}
+                    {% if rows % count == 0 %}
+                        {% for i in range(0, allPage) %}
+                            <a href="?key={{ key }}&count={{ count }}&page={{ i }}&isReg={{ isReg }}" {{ 'class=cur-page' if page == i else 'class=' }}>{{ i + 1 }}</a>
+                        {% endfor %}
+                        <a href="?key={{ key }}&count={{ count }}&page={{ page + 1 }}&isReg={{ isReg }}" style="display: {{ 'none' if allPage == page + 1 else 'inline-block' }}">></a>
+                    {% elif rows % count != 0 %}
+                        {% for i in range(0, allPage + 1) %}
+                            <a href="?key={{ key }}&count={{ count }}&page={{ i }}&isReg={{ isReg }}" {{ 'class=cur-page' if page == i else 'class=' }}>{{ i + 1 }}</a>
+                        {% endfor %}
+                        <a href="?key={{ key }}&count={{ count }}&page={{ page + 1 }}&isReg={{ isReg }}" style="display: {{ 'none' if allPage + 1 == page + 1 else 'inline-block' }}">></a>
+                    {% endif %}
+                {% endif %}
+            </aside>
+        </footer>
+    {% endif %}
+
+{% endblock %}
+{% block endScript %}
+    <script src="/static/Js/slide.js"></script>
+    <script>
+        $("#search").on("click", function () {
+            var key = $("#search-key").val();
+            if (key)
+                location.href = "?key=" + key;
+
+        });
+
+        $("#search-key").keypress(function(e) {
+            if(e.which == 13) {
+                var key = $(this).val();
+                if (key)
+                    location.href = "?key=" + key;
+            }
+        });
+
+        var item =  $(".person-item");
+        var doDel = $("#doDel");
+        var doKind = $("#doKind");
+        var mulKind = $("#mulKind");
+        var mulDel = $("#mulDel");
+
+        mulDel.on("click", function() {
+            switch ($(this).text()) {
+                case "批量删除":
+                    mulKind.css("display", "none");
+                    item.addClass("preToDel");
+                    doDel.css("display", "inline-block");
+                    $(this).text("取消操作");
+                    $(this).addClass("NoDel");
+                    item.on("click", function() {
+                        if ($(this).hasClass("preDel"))
+                            $(this).removeClass("preDel");
+                        else
+                            $(this).addClass("preDel");
+
+                    });
+                    break;
+                case "取消操作":
+                    mulKind.css("display", "inline-block");
+                    item.on("click", function(){
+                        $(this).removeClass("preDel");
+                    });
+                    doDel.toggle();
+                    item.removeClass("preToDel preDel");
+                    $(this).text("批量删除");
+                    $(this).removeClass("NoDel");
+                    break;
+            }
+
+        });
+
+        mulKind.on("click", function() {
+            switch ($(this).text()) {
+                case "批量分类":
+                    mulDel.css("display", "none");
+                    doKind.css("display", "inline-block");
+                    $(this).text("取消操作");
+                    $(this).addClass("NoDel");
+                    item.addClass("preToDel");
+                    $(this).addClass("NoDel");
+                    item.addClass("preToDel");
+                    item.on("click", function() {
+                        if ($(this).hasClass("preKind"))
+                            $(this).removeClass("preKind");
+                        else
+                            $(this).addClass("preKind");
+
+                    });
+                    break;
+                case "取消操作":
+                    mulDel.css("display", "inline-block");
+                    doKind.toggle();
+                    $(this).text("批量分类");
+                    $(this).removeClass("NoDel");
+                    item.removeClass("preToDel");
+                    item.on("click", function(){
+                        $(this).removeClass("preKind");
+                    });
+                    item.removeClass("preToDel preKind");
+                    $(this).removeClass("NoDel");
+                    break;
+            }
+
+        });
+
+        doDel.on("click", function () {
+            var id = $(".preDel").find("#person-id").text();
+            if (id) {
+                var form = document.createElement("form");
+                form.setAttribute("method", "post");
+                form.setAttribute("action", "/user/mulDelete");
+
+                form.setAttribute("target", "_self");
+
+                var hiddenField = document.createElement("input");
+                hiddenField.setAttribute("name", "uIDs");
+                hiddenField.setAttribute("value", id);
+                form.appendChild(hiddenField);
+                document.body.appendChild(form);
+
+
+                form.submit();
+            }
+        });
+
+        doKind.on("click", function () {
+            var id = $(".preKind").find("#person-id").text();
+            if (id)
+                location.href = "/user/mulKind/" + id;
+        });
+
+        if ($("#isReg").hasClass("on")) {
+            $("#isReg").prop("checked", true);
+        }
+
+        $("#isReg").on("change", function () {
+            var t = $(this);
+            if (t.hasClass("off"))
+                location.href = "?key={{ key }}&isReg=0";
+            else
+                location.href = "?key={{ key }}&isReg=1";
+        })
+    </script>
+{% endblock %}

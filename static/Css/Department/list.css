@@ -1,0 +1,215 @@
+.header-bar { margin: 10px 20px; height: 40px; padding: 5px; background: rgba(0, 0, 0, 0.3); border-radius:5px;}
+.header-bar * {margin: 0; padding:0; height: 30px; line-height: 30px; display: inline-block;color: #bad6ed }
+.header-bar li {margin: 5px; background: #5d7498;  padding: 0 10px; border-radius: 5px;}
+
+.header-bar ul {display: block!important;}
+.header-bar .last { margin: 5px 0; background: rgba(0, 0, 0, 0)}
+.header-bar .last input, button {
+    height: 30px;
+    line-height: 30px;
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.header-bar .last input {border-radius: 5px 0 0 5px; padding: 0 5px; color: black!important;}
+.header-bar .last button {border-radius: 0 5px 5px 0; width: 40px; text-align: center; background: #5d7498; }
+
+body>section {margin: 10px 20px}
+
+table {
+    width: 100%;
+}
+
+td>ul { margin: 15px 30px; }
+td>ul ul { padding: 5px 30px; }
+td>ul li>section>ul>li {margin-left: 0}
+
+
+
+
+
+.level0 ul { margin: 0}
+.level0 li {margin: 0 0; padding: 0}
+.level0 li>section {display: inline-block}
+.level0 ul>li>ul>li { margin-left: 40px!important;}
+
+
+.last-li {border: 0!important;}
+
+.level0 p {
+    cursor: pointer;
+}
+.level0 section { cursor: auto !important;}
+.level0 p { display: inline-block; background-color: rgba(57, 75, 84, 0.7); color: white; padding: 10px 15px; border-radius: 5px;}
+.level0 section>section { display: inline-block; padding: 2px 5px; background-color: rgba(0,0,0,0.2); color: white; border-radius: 5px;}
+
+.level0 section>ul { padding: 0!important; margin: 0!important;}
+.level0 section>ul>li { display: inline-block; margin: 0!important; padding: 3px 7px; border: 0!important; cursor: pointer}
+
+
+/*
+** 节点虚线
+*/
+.level0 ul>li { border-left: 1px dashed #89b7d9}
+.last-li>span {border-left: 1px dashed #89b7d9;}
+.last-li {border: 0!important;}
+.level0 li>span {display: inline-block; height: 27px; width: 30px; border-bottom: 1px dashed #89b7d9; margin-bottom: 5px}
+.level0 section>span { display: inline-block; height: 27px; width: 30px; border-bottom: 1px dashed #89b7d9; cursor: auto; margin-bottom: 5px;}
+
+
+.content-box .last-li span {border: 0}
+
+.content-box>section {
+    height: 320px;
+    width: 340px;
+    background-color: rgba(19, 26, 32, 0.6);
+    display: inline-block;
+    border-radius: 6px;
+    margin: 10px 15px 15px 10px;
+    box-shadow: 5px 5px 5px rgba(19, 26, 32, 0.8);
+}
+
+.content-box header {
+    padding: 10px 15px 0 15px;
+}
+
+.content-box header img {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    border-radius: 90px;
+}
+
+.content-box header>aside {
+    height: 80px;
+    width: 150px;
+    float: right;
+    padding: 0 20px 0 20px;
+    border: 0;
+    display: inline-block;
+}
+
+.content-box header>aside>p {
+    float: left;
+    color: white;
+    height: 80px;
+    width: 100px;
+    line-height: 80px;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.content-box header>aside>section {
+    float: right;
+    display: inline-block;
+    width: 20px;
+    height: 80px;
+}
+
+.content-box header>aside>section>a {
+    margin-top: 10px;
+    height: 20px;
+    width: 20px;
+    display: block;
+}
+
+.person-item:hover {background-color: rgba(0, 0, 0, 0.3)}
+
+.ctrl-edit {
+    background: url("/static/Image/icon-edit.png");
+}
+
+.ctrl-delete {
+    background: url("/static/Image/icon-trash.png");
+}
+
+.ctrl-edit:hover {
+    background: url("/static/Image/icon-edit1.png");
+}
+
+.ctrl-delete:hover {
+    background: url("/static/Image/icon-trash1.png");
+}
+
+.content-box ul {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.content-box li {
+    border-top: 1px solid #5d7498;
+    padding: 5px 0 5px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.content-box li p, span {
+    padding-left: 15px;
+    display: inline-block;
+    font-size: 12px;
+    color: #a7c4db !important;
+}
+
+.content-box li p {
+    width: 140px;
+}
+
+.content-box li span{
+    width: 60px;
+}
+
+.content-box section>aside {
+    height: 136px;
+}
+
+#person-id {
+    display: none;
+}
+
+.main-box {margin: 10px 20px; border-radius: 5px}
+
+.main-box section>ul { margin: 15px 30px; white-space: nowrap}
+.main-box section>ul ul { padding: 5px 30px; }
+.main-box section>ul li>section>ul>li {margin-left: 0}
+
+.main-box {height: 100%;}
+.main-box .left, .right { position: absolute; bottom: 10px; top: 80px;overflow: auto; background-color: rgba(0, 0, 0, 0.3)}
+.main-box .left {
+    left: 10px;
+    width: 400px;
+    border-radius: 5px
+}
+
+.main-box .right {
+    right: 10px;
+    padding-left: 10px;
+    left: 420px;
+    border-radius: 5px;
+}
+
+select {
+    border-radius: 5px;
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 5px;
+    background: #8baed6;
+    border: 0;
+    color: #34435a !important;
+    /*color: rgba(0, 0, 0, 0.5 )!important;*/
+}
+
+.dep-select {
+    background-color: rgba(0, 0,0,0)!important;
+}
+
+.dep-select select {
+    width: 150px;
+}
+
+select:focus {
+    outline: none;
+}

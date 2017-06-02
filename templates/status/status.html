@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block meta %}
+{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="/static/Css/status.css">
+{% endblock %}
+{% block body %}
+    <section class="content-box">
+        <header>
+            <img src="{{ "/static/Image/success.png" if flag else "/static/Image/error.png" }}" alt="">
+        </header>
+
+        <section>
+            <p class="{{ "success" if flag else "error" }}" title="{{ message }}">{{ message }}</p>
+        </section>
+
+        <footer>
+            <a id="timeout"><span>10</span>秒后跳转</a>
+            <a id="now">立即跳转</a>
+        </footer>
+    </section>
+{% endblock %}
+{% block endScript %}
+    <script>
+        var timeout = $("#timeout");
+        var now = $("#now");
+        var second = $("span");
+
+        now.on("click", function() {
+            {% if parent %}
+                window.parent.location.href = "{{ url }}";
+            {% else %}
+                location.href = "{{ url }}";
+            {% endif %}
+        });
+
+        window.setInterval(function(){
+            var currentTime = Math.floor(second.text()) - 1;
+            if (currentTime > 0)
+                second.text(currentTime);
+            else
+                {% if parent %}
+                    window.parent.location.href = "{{ url }}";
+                {% else %}
+                    location.href = "{{ url }}";
+                {% endif %}
+        }, 1000);
+
+        setTimeout(function() {
+            {% if parent %}
+                window.parent.location.href = "{{ url }}";
+            {% else %}
+                location.href = "{{ url }}";
+            {% endif %}
+        }, 10000)
+
+
+
+    </script>
+{% endblock %}

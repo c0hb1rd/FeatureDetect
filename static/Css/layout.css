@@ -1,0 +1,60 @@
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: '微软雅黑', sans-serif;
+    background: url("/static/Image/background.jpg") no-repeat fixed;
+    background-size: cover;
+}
+
+a {
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:visited {
+    color:black
+}
+
+a:hover {
+    color: red
+}
+
+input {
+    outline: none;
+}
+
+ul, dl {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+li, dt, dl {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.hidden-tag {
+    display: none;
+}
+
+p {
+    padding: 0;
+    margin: 0;
+    height: auto;
+    width: auto;
+}
+
+h2 {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+button:hover, .submit-input {cursor:pointer}

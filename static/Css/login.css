@@ -1,0 +1,81 @@
+body {
+    text-align: center;
+}
+
+.login-box {
+    margin-top: 250px;
+    width:460px;
+    height:400px;
+    background:rgba(0,0,0,0.3);
+    border-radius:6px;
+    display: inline-block;
+}
+
+.login-title {
+    display: inline-block;
+    font-size:24px;
+    font-weight:600;
+    margin: 50px 0;
+    padding: 10px 0;
+    width: 250px;
+    color:#ffffff;
+    border-bottom:4px solid #ffffff;
+}
+
+.login-box section {
+    background: #383A51;
+    width:320px;
+    height:50px;
+    display: inline-block;
+    margin: 5px 0;
+    opacity: 0.7;
+    border-radius:6px;
+
+}
+
+.login-button {
+    width:80px;
+    height:36px;
+    background:#536781;
+    border-radius:6px;
+    color:#ffffff;
+    border: 0;
+    font-size:14px;
+}
+
+.login-box section input {
+    display: inline-block;
+    width: 270px;
+    height: 40px;
+    line-height: 50px;
+    float: left;
+    border: 0;
+    margin: 5px 0 5px 10px;
+    background: #383A51;
+    color: #aec9e9;
+::-webkit-input-placeholder:#5f7597;
+}
+
+.login-box span {
+    display: inline-block;
+    width: 24px;
+    height: 50px;
+    line-height: 50px;
+    float: right;
+    margin-right: 10px;
+}
+
+
+.login-user span {
+    background: url("/static/Image/user_login.png") center no-repeat;
+}
+
+.login-password span {
+    background: url("/static/Image/pwd_login.png") center no-repeat;
+}
+
+.login-hr {
+    margin: 20px 50px;
+    display: block;
+    border-bottom:4px dashed rgba(0,0,0,0.2)
+}

@@ -1,0 +1,130 @@
+body {
+    text-align: center;
+}
+
+section {
+    padding: 30px;
+    display: inline-block;
+}
+
+form>ul {
+    text-align: left;
+    padding: 10px 20px;
+    background-color: rgba(19, 26, 32, 0.6);
+    box-shadow: 3px 3px 3px #303030;
+    border-radius: 5px;
+}
+
+label {
+    color: #a7c4db;
+    width: 60px;
+    height: 50px;
+    font-size: 14px;
+    line-height: 50px;
+    display: inline-block;
+    text-align: right;
+    margin-right: 10px;
+}
+
+li {
+    height: 50px;
+    border-bottom: 1px solid #5d7498;
+}
+
+li input {
+    width: 280px;
+    border-radius: 5px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 0;
+}
+
+select {
+    border-radius: 5px;
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 5px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 0;
+}
+
+.dep-select {
+    width: 200px;
+}
+
+.rights-select {
+    width: 150px;
+}
+
+select:focus {
+    outline: none;
+}
+
+.last-li {
+    border: 0;
+    padding-top: 20px;
+    text-align: center;
+}
+
+button {
+    margin-left: 10px;
+}
+
+.last-li>button, .last-li>input {
+    height: 30px;
+    line-height: 30px;
+    width: 60px;
+    border-radius: 5px;
+    border: 0;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.role-block {
+    height: auto;
+}
+
+.role-block section {
+    padding: 0;
+    margin: 0;
+}
+
+.role-block>section input {
+    width: 20px;
+    height: 20px;
+    line-height: 30px;
+    display: inline-block;
+    float: left;
+    margin: 0;
+}
+
+.role-block ul {
+    width: 400px;
+    padding: 5px;
+    margin: 0;
+}
+
+.role-block>section label {
+    height: 20px;
+    display: inline-block;
+    width: auto;
+    line-height: 20px;
+    margin: 0 0 0 5px;
+    float: right;
+}
+
+.role-block li {
+    height: 20px;
+    line-height: 20px;
+    display: inline-block;
+    border: 0;
+    margin: 5px;
+
+}
+
+.role-block>label {
+    float: left;
+}
+

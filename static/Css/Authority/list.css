@@ -1,0 +1,8 @@
+.del-li {background: rgba(255, 0,0 ,0.5)!important; display: none}
+
+.cancel {background: gray!important;}
+
+.hidden {display: none}
+
+.ctrl-classify {background: url("/static/Image/icon-class.png") no-repeat center}
+.ctrl-classify:hover {background: url("/static/Image/icon-class1.png") no-repeat center}

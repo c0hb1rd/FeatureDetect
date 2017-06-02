@@ -1,0 +1,198 @@
+{% extends "layout.html" %}
+{% block style %}
+    <link rel="stylesheet" href="/static/Css/Department/table.css">
+    <link rel="stylesheet" href="/static/Css/Authority/list.css">
+    <link rel="stylesheet" href="/static/Css/slide.css">
+{% endblock %}
+{% block body %}
+    <div class="cd-popup" role="alert">
+        <div class="cd-popup-container">
+            <p>确定删除{{ kind|formatKind }}？</p>
+            <ul class="cd-buttons">
+                <li><a id="yes">确定</a></li>
+                <li><a id="no">取消</a></li>
+            </ul>
+            <a href="#0" class="cd-popup-close img-replace">Close</a>
+        </div>
+        <!-- cd-popup-container -->
+    </div>
+
+
+    <header class="header-bar">
+        <ul>
+            <li class="del-li"><a id="do-del">批量删除</a></li>
+            <li><a id="choose-all">批量操作</a></li>
+            <li><a href="{{ url_for("authority.addAuth", kind=kind) }}">添加{{ kind|formatKind }}</a></li>
+            <li><a href="{{ url_for("authority.importAuth", kind=kind) }}">导入{{ kind|formatKind }}</a></li>
+            <li class="last"><input id="search-key" type="text" placeholder="关键词" value="{{ "" if key == "none" else key }}"><button id="search">搜索</button></li>
+        </ul>
+    </header>
+
+
+    <section class="table-box">
+        <form action="{{ url_for("authority.mulDelAuth", kind=kind) }}" method="post">
+            <table>
+
+                <thead>
+                <tr>
+                    <th class="hidden" width="5px"><input class="all-check off" type="checkbox"></th>
+                    <th width="20%">{{ kind|formatKind }}名称</th>
+                    <th width="">{{ kind|formatKind + "描述"  if kind != 'control' else "Url" }}</th>
+                    {% if kind == 'role'%}
+                        <th width="30%">{{ kind|formatKind }}权限点</th>
+                    {% elif kind == 'key' %}
+                        <th width="30%">{{ kind|formatKind }}资源</th>
+                    {% elif kind == 'control' %}
+                        <th width="15%">{{ kind|formatKind }}所属</th>
+                        <th width="15%">{{ kind|formatKind }}标识</th>
+                    {% endif %}
+
+                    <th width="20%">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for line in data %}
+                    <tr>
+                        <td class="hidden"><input type="checkbox" value="{{ line.id }}" name="objIDs"></td>
+                        <td>{{ line.name }}</td>
+                        <td>{{ line.detail }}</td>
+                        {% if kind == 'role' %}
+                            <td>{% for k in line['keys'] %}{{ k.name }}、{% endfor %}</td>
+                            {#                            <td>{{ line.keys }}</td>#}
+                        {% elif kind == 'key' %}
+                            <td>{% for c in line.controls %}{{ c.name }}、{% endfor %}</td>
+                        {% elif kind == 'control' %}
+                            <td>{{ line.system }}</td>
+                            <td>{{ line.flag }}</td>
+                        {% endif %}
+                        <td>
+                            {% if kind != 'control' %}
+                                <a title="分配" href="{{ url_for("authority.classifyAuth", objID=line.id, kind=kind) }}" class="ctrl-classify"></a>
+                            {% endif %}
+                            <a title="修改" href="{{ url_for("authority.editAuth", objID=line.id, kind=kind) }}" class="ctrl-edit"></a>
+                            <a title="删除" href="{{ url_for("authority.delAuth", objID=line.id, kind=kind) }}" class="ctrl-delete"></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </form>
+    </section>
+
+    {% if data|length > 0 %}
+        <footer>
+            <span>当页条数：{{ data|length }} / 总条数：{{ rows }}</span>
+
+            <aside>
+                <a class="prev" href="?key={{ key }}&count={{ count }}&page=0" style="display: {{ 'none' if 0 == page or allPage < 9 else 'inline-block' }}"><<</a>
+                <a href="?key={{ key }}&count={{ count }}&page={{ page - 1 }}" style="display: {{ 'none' if 0 == page else 'inline-block' }}"><</a>
+                {% if allPage > 9 and rows  % count != 0 %}
+                    {% if page + 5 < 10 and page + 5 < allPage %}
+                        {% for i in range(0, 9) %}
+                            <a href="?key={{ key }}&count={{ count }}&page={{ i }}" {{ 'class=cur-page' if page == i else 'class=' }}>{{ i + 1 }}</a>
+                        {% endfor %}
+                    {% elif page + 4 < allPage %}
+                        {% for i in range(page - 4, page + 5) %}
+                            <a href="?key={{ key }}&count={{ count }}&page={{ i }}" {{ 'class=cur-page' if page == i else 'class=' }}>{{ i + 1 }}</a>
+                        {% endfor %}
+                    {% elif page + 4 >= allPage %}
+                        {% for i in range(allPage - 8, allPage + 1) %}
+                            <a href="?key={{ key }}&count={{ count }}&page={{ i }}" {{ 'class=cur-page' if page == i else 'class=' }}>{{ i + 1 }}</a>
+                        {% endfor %}
+                    {% endif %}
+                    <a class="more" style="display: {{ 'none' if page + 5 >= allPage + 1 else 'inline-block' }}">...</a>
+                    <a href="?key={{ key }}&count={{ count }}&page={{ page + 1 }}" style="display: {{ 'none' if allPage + 1 == page + 1 else 'inline-block' }}">></a>
+                    <a class="next" href="?key={{ key }}&count={{ count }}&page={{ allPage }}" style="display: {{ 'none' if allPage + 1 <= page + 5  else 'inline-block' }}">>></a>
+                {% elif allPage > 9 and rows % count == 0 %}
+                    {% if page + 5 < 10 and page + 5 < allPage %}
+                        {% for i in range(0, 9) %}
+                            <a href="?key={{ key }}&count={{ count }}&page={{ i }}" {{ 'class=cur-page' if page == i else 'class=' }}>{{ i + 1 }}</a>
+                        {% endfor %}
+                    {% elif page + 4 < allPage %}
+                        {% for i in range(page - 4, page + 5) %}
+                            <a href="?key={{ key }}&count={{ count }}&page={{ i }}" {{ 'class=cur-page' if page == i else 'class=' }}>{{ i + 1 }}</a>
+                        {% endfor %}
+                    {% elif page + 4 >= allPage %}
+                        {% for i in range(allPage - 8, allPage) %}
+                            <a href="?key={{ key }}&count={{ count }}&page={{ i }}" {{ 'class=cur-page' if page == i else 'class=' }}>{{ i + 1 }}</a>
+                        {% endfor %}
+                    {% endif %}
+                    <a class="more" style="display: {{ 'none' if page + 5 >= allPage else 'inline-block' }}">...</a>
+                    <a href="?key={{ key }}&count={{ count }}&page={{ page + 1 }}" style="display: {{ 'none' if allPage - 1 == page else 'inline-block' }}">></a>
+                    <a class="next" href="?key={{ key }}&count={{ count }}&page={{ allPage - 1 }}" style="display: {{ 'none' if allPage <= page + 5  else 'inline-block' }}">>></a>
+                {% else %}
+                    {% if rows % count == 0 %}
+                        {% for i in range(0, allPage) %}
+                            <a href="?key={{ key }}&count={{ count }}&page={{ i }}" {{ 'class=cur-page' if page == i else 'class=' }}>{{ i + 1 }}</a>
+                        {% endfor %}
+                        <a href="?key={{ key }}&count={{ count }}&page={{ page + 1 }}" style="display: {{ 'none' if allPage == page + 1 else 'inline-block' }}">></a>
+                    {% elif rows % count != 0 %}
+                        {% for i in range(0, allPage + 1) %}
+                            <a href="?key={{ key }}&count={{ count }}&page={{ i }}" {{ 'class=cur-page' if page == i else 'class=' }}>{{ i + 1 }}</a>
+                        {% endfor %}
+                        <a href="?key={{ key }}&count={{ count }}&page={{ page + 1 }}" style="display: {{ 'none' if allPage + 1 == page + 1 else 'inline-block' }}">></a>
+                    {% endif %}
+                {% endif %}
+            </aside>
+        </footer>
+    {% endif %}
+{% endblock %}
+{% block endScript %}
+    <script src="/static/Js/slide.js"></script>
+    <script>
+        $("#search").on("click", function () {
+            var key = $("#search-key").val();
+            if (key)
+                location.href = "?key=" + key;
+
+        });
+
+        $("#search-key").keypress(function(e) {
+            if(e.which == 13) {
+                var key = $(this).val();
+                if (key)
+                    location.href = "?key=" + key;
+            }
+        });
+
+        var allBox = $("input[type=checkbox]");
+        $("#choose-all").on("click", function () {
+            var delLi = $(".del-li");
+            switch ($(this).text()) {
+                case "批量操作":
+                    delLi.css("display", "inline-block");
+                    $(this).text("取消操作");
+                    $(this).parent().addClass("cancel");
+                    allBox.parent().removeClass("hidden");
+                    break;
+                case "取消操作":
+                    delLi.css("display", "none");
+                    $(this).text("批量操作");
+                    $(this).parent().removeClass("cancel");
+                    allBox.parent().addClass("hidden");
+                    allBox.removeAttr("checked");
+                    break;
+            }
+        });
+
+        $(".all-check").on("click", function() {
+            if ($(this).hasClass("off")) {
+                allBox.prop("checked", true);
+                $(this).removeClass("off");
+                $(this).addClass("on");
+            } else {
+                allBox.prop("checked", false);
+                $(this).removeClass("on");
+                $(this).addClass("off");
+            }
+        });
+
+        $(".del-li a").on("click", function () {
+            if ($("input:checked").length > 1) {
+                $("form").submit()
+            } else {
+                alert("未指定操作条目")
+            }
+        });
+    </script>
+{% endblock %}

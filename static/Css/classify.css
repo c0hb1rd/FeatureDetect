@@ -1,0 +1,46 @@
+body {text-align: center}
+
+h2 {margin: 20px;}
+body>section {
+    margin: 10px 30px; display: inline-block; background-color: rgba(19, 26, 32, 0.5); border-radius: 5px; box-shadow: 3px 3px 3px #303030; color: #a7c4db;
+}
+
+
+.info-box {margin: 20px 30px;}
+
+.info-box>ul {padding: 5px 30px; display: inline-block; background-color: rgba(133, 186, 312, 0.1); border-radius: 5px; box-shadow: 3px 3px 3px #303030; color: #a7c4db;}
+
+.info-box>ul>li {border-bottom: 1px solid #89b7d9; width: 400px}
+.info-box>ul>li:first-child { height: 40px; line-height: 40px;}
+.info-box>ul>li:last-child {border-bottom: 0; height: 40px; padding-top: 10px; line-height: 25px;}
+
+.info-box li>section p {display: inline-block}
+.info-box li>section p:first-child {float: left; width: 40px; text-align: right; margin-right: 10px;}
+.info-box li>section p:last-child {width: 340px; float: right; white-space: normal}
+
+.check-box {margin: 0 30px 20px 30px; padding: 5px 30px; display: inline-block; background-color: rgba(133, 186, 312, 0.1); border-radius: 5px; box-shadow: 3px 3px 3px #303030; color: #a7c4db;}
+.check-box p {cursor: pointer; display: inline-block; width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: right; float: left; padding-right: 20px; font-size: 16px; font-weight: bold; color: #7797c5 !important;}
+.check-box ul ul {display: inline-block; float: right; width: 510px}
+.check-box ul ul>li {width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: left}
+.check-box>ul>li {max-width: 640px; clear: both; border-bottom: 1px solid #5d7498}
+.check-box li {line-height: 30px; height: 30px}
+.check-box li ul li {display: inline-block; margin-right: 10px; min-width: 80px; white-space: nowrap}
+
+.check-box li:last-child {border: 0}
+.check-box label, .check-box input {cursor: pointer}
+
+footer {
+    margin: 0 30px 20px 50px;
+}
+
+footer button {
+    margin-right: 15px;
+    border-radius: 5px;
+    border: 0;
+    padding: 8px 20px 8px 20px;
+    cursor: pointer;
+}
+
+button:focus {
+    outline: none;
+}
